@@ -17,7 +17,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="productCode">Product Code</label>
-                                <input type="text" name="productCode" class="form-control" disabled value="{{$product->product_code}}">
+                                <input type="text" name="productCode" class="form-control" disabled value="{{$product->product_code}}" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -27,7 +27,7 @@
                                   <div class="input-group-prepend">
                                     <span class="input-group-text">£</span>
                                   </div>
-                                  <input type="decimal" class="form-control" name="price" value="{{$product->price}}">
+                                  <input type="decimal" class="form-control" name="price" value="{{$product->price}}" required min="0" step="00.01">
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="productDescription">Product Description</label>
-                                <textarea type="text" rows="3" name="productDescription" class="form-control" value="{{$product->product_description}}"></textarea>
+                                <textarea type="text" rows="3" name="productDescription" class="form-control">{{$product->product_description}}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -49,6 +49,14 @@
                                 <input type="productImage" class="custom-file-input">
                                 <label class="custom-file-label">Product Image, choose file</label>
                               </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="productBarcode">Product Barcode</label>
+                                <input type="text" name="productBarcode" class="form-control" value="{{$product->barcode}}" required>
                             </div>
                         </div>
                     </div>

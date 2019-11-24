@@ -21,7 +21,8 @@ class ProductController extends Controller
         if ($request->isMethod('post')) {
             $productDescription = $request->input('productDescription');
             $price = $request->input('price');
-            ProductHelper::editProduct($productCode, $productDescription, $price);
+            $productBarcode = $request->input('productBarcode');
+            ProductHelper::editProduct($productCode, $productDescription, $price, $productBarcode);
             return redirect()->route('admin.products.index')->with('success', 'Product has been edited');
         }
         $product = Product::where('product_code', $productCode)->first();
@@ -32,9 +33,14 @@ class ProductController extends Controller
         $productCode = $request->input('productCode');
         $productDescription = $request->input('productDescription');
         $price = $request->input('price');
-        ProductHelper::addProduct($productCode, $productDescription, $price);
-
-        return redirect()->route('admin.products.index')->with('success', 'Product ' . $request->input('product_name') . ' added');
+        $productBarcode = $request->input('productBarcode');
+        $checkProductCode = ProductHelper::checkProductCode($productCode);
+        if ($checkProductCode == 0) {
+            ProductHelper::addProduct($productCode, $productDescription, $price, $productBarcode);
+            return redirect()->route('admin.products.index')->with('success', 'Product ' . $request->input('product_name') . ' added');
+        } else {
+            return redirect()->route('admin.products.index')->with('warning', 'Product is duplicated, please check exsiting product');
+        }
     }
 
     public function deleteProduct($productCode) {
