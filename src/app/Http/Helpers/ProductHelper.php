@@ -36,4 +36,11 @@ class ProductHelper
     public static function deleteProduct($productCode) {
         Product::where('product_code', $productCode)->delete();
     }
+
+    public static function searchProducts($request) {
+        // Find all products with description or product code like
+        return Product::where('product_code', 'like', '%'. $request->input('search'). '%')
+                        ->orWhere('product_description', 'like', '%' . $request->input('search') . '%')
+                        ->paginate(15);
+    }
 }

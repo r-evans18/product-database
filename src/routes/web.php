@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/', 'HomeController@index')->name('admin-index');
 
+    Route::post('search-producst', 'ProductController@searchProducts')->name('search-products');
+
     Route::prefix('catalogue')->group(function () {
         Route::get('/', 'CatalogueController@index')->name('admin.catalogue.index');
     });

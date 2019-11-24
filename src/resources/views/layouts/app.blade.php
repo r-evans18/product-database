@@ -19,8 +19,9 @@
         <a class="nav-link" href="{{route('admin.products.index')}}">Master Stock <span class="sr-only"></span></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0 mr-sm-2">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <form action="{{route('search-products')}}" class="form-inline my-2 my-lg-0 mr-sm-2" method="post">
+        @csrf
+      <input class="form-control mr-sm-2" type="text" placeholder="Search.." name="search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
     <a class="btn btn-secondary" href="{{route('logout')}}">Logout</a>

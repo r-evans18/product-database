@@ -20,6 +20,7 @@ class ProductController extends Controller
     }
 
     public function editProduct(Request $request, $productCode) {
+        // Checking route method
         if ($request->isMethod('post')) {
             $productDescription = $request->input('productDescription');
             $price = $request->input('price');
@@ -36,6 +37,8 @@ class ProductController extends Controller
         $productDescription = $request->input('productDescription');
         $price = $request->input('price');
         $productBarcode = $request->input('productBarcode');
+
+        // Check if product code exists
         $checkProductCode = ProductHelper::checkProductCode($productCode);
         if ($checkProductCode == 0) {
             ProductHelper::addProduct($productCode, $productDescription, $price, $productBarcode);
@@ -52,5 +55,10 @@ class ProductController extends Controller
 
     public function exportProducts() {
         return Excel::download(new ProductExport, 'products.csv');
+    }
+
+    public function searchProducts(Request $request) {
+        $products = ProductHelper::searchProducts($request);
+        return view('admin.products.index', compact('products'));
     }
 }
