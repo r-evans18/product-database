@@ -34,5 +34,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', 'ProductController@index')->name('admin.products.index');
         Route::get('/add', 'ProductController@add')->name('admin.products.add');
         Route::post('/addProduct', 'ProductController@addProduct')->name('admin.products.addProduct');
+        Route::any('/edit/{productCode}', 'ProductController@editProduct')->name('admin.products.editProduct');
+        Route::get('/delete/{productCode}', 'ProductController@deleteProduct')->name('admin.products.deleteProduct');
     });
 });
