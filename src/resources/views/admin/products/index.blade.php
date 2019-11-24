@@ -3,6 +3,7 @@
 <div class="row">
     <div class="col-lg-12">
         <a href="{{route('admin.products.add')}}" class="float-right btn btn-primary">Add Product</a>
+        <a href="{{route('admin.products.exportProducts')}}" class="float-right btn btn-primary" style="margin-right: 8px;">Export Products</a>
         <h3>Master Stock</h3>
         <hr />
         <p></p>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Helpers\ProductHelper;
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -46,5 +48,9 @@ class ProductController extends Controller
     public function deleteProduct($productCode) {
         ProductHelper::deleteProduct($productCode);
         return redirect()->back()->with('success', 'Product Deleted');
+    }
+
+    public function exportProducts() {
+        return Excel::download(new ProductExport, 'products.csv');
     }
 }

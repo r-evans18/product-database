@@ -36,5 +36,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/addProduct', 'ProductController@addProduct')->name('admin.products.addProduct');
         Route::any('/edit/{productCode}', 'ProductController@editProduct')->name('admin.products.editProduct');
         Route::get('/delete/{productCode}', 'ProductController@deleteProduct')->name('admin.products.deleteProduct');
+        Route::get('/export', 'ProductController@exportProducts')->name('admin.products.exportProducts');
     });
 });
