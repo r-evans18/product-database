@@ -44,7 +44,7 @@ class ProductController extends Controller
             ProductHelper::addProduct($productCode, $productDescription, $price, $productBarcode);
             return redirect()->route('admin.products.index')->with('success', 'Product ' . $request->input('product_name') . ' added');
         } else {
-            return redirect()->route('admin.products.index')->with('warning', 'Product is duplicated, please check exsiting product');
+            return redirect()->route('admin.products.index')->with('warning', 'Product is duplicated, please check existing product');
         }
     }
 
@@ -54,7 +54,12 @@ class ProductController extends Controller
     }
 
     public function exportProducts() {
-        return Excel::download(new ProductExport, 'products.csv');
+        $check = Product::count();
+        if ($check != 0) {
+            return Excel::download(new ProductExport, 'products.csv');
+        } else {
+            return redirect()->back()->with('warning', 'There are no products to export');
+        }
     }
 
     public function searchProducts(Request $request) {
